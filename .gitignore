@@ -38,3 +38,8 @@ next-env.d.ts
 
 # IDE
 /.idea/
+
+# prisma
+prisma/dev.db
+prisma/dev.db-journal
+prisma/migrations/
