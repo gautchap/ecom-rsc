@@ -68,13 +68,17 @@ export function LoginForm() {
     <>
       <Card>
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl">Sign In</CardTitle>
+          <CardTitle className="text-2xl">Se connecter</CardTitle>
           <CardDescription>
-            Enter your email below to sign in with providers
+            Enrtrez votre adresse mail ci-dessous pour vous connecter
           </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-4">
-          <Button variant="outline" onClick={() => signIn("google")}>
+          <Button
+            className="max-w-[15rem] mx-auto w-full"
+            variant="outline"
+            onClick={() => signIn("google")}
+          >
             <Icons.google className="mr-2 h-4 w-4" />
             Google
           </Button>
@@ -84,7 +88,7 @@ export function LoginForm() {
             </div>
             <div className="relative flex justify-center text-xs uppercase">
               <span className="bg-background px-2 text-muted-foreground">
-                Or continue with
+                Ou continuer avec
               </span>
             </div>
           </div>
@@ -118,7 +122,7 @@ export function LoginForm() {
                 {form.formState.isSubmitting && (
                   <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
                 )}
-                <EnvelopeOpenIcon className="mr-2 h-4 w-4" /> Login with Email
+                <EnvelopeOpenIcon className="mr-2 h-4 w-4" /> Recevoir mon lien
               </Button>
             </form>
           </Form>
