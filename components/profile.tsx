@@ -5,10 +5,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { signOut, useSession } from "next-auth/react";
 import { PinRightIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
+import Image from "next/image";
+import profileIcon from "@/assets/boy-front-gradient.png";
 
 export function Profile() {
   const { data: session } = useSession();
@@ -16,12 +18,20 @@ export function Profile() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon">
+        <Button className="rounded-full bg-muted" variant="ghost" size="icon">
           <Avatar>
-            <AvatarImage src={session?.user?.image} />
-            <AvatarFallback>
-              {session?.user?.name?.toUpperCase().slice(0, 2)}
-            </AvatarFallback>
+            {session?.user?.image ? (
+              <AvatarImage src={session?.user?.image} className="p-1" />
+            ) : (
+              <Image
+                className="p-1"
+                src={profileIcon}
+                alt="profile"
+                width={40}
+                height={40}
+                quality={100}
+              />
+            )}
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
