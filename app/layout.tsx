@@ -1,6 +1,5 @@
 import "@/styles/globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import { ReactNode } from "react";
 import { Navbar } from "@/components/nav-bar";
 import { getServerSession } from "next-auth";
@@ -8,8 +7,9 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import SessionProvider from "@/context/NextAuthProvider";
 import { ThemeProvider } from "@/context/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
+import { Poppins } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({ weight: ["400", "600"], subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -24,7 +24,7 @@ export default async function RootLayout({
   const session = await getServerSession(authOptions);
   return (
     <html lang="fr" suppressHydrationWarning>
-      <body className={inter.className} suppressHydrationWarning>
+      <body className={poppins.className} suppressHydrationWarning>
         <SessionProvider session={session}>
           <ThemeProvider
             attribute="class"
