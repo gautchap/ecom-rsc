@@ -12,7 +12,7 @@ export function Navbar() {
   const { setTheme } = useTheme();
 
   return (
-    <nav className="container flex items-center justify-between py-3 px-2 md:px-8">
+    <nav className="container flex items-center justify-between py-3">
       <div>test</div>
 
       <div className="flex gap-2 items-center">
