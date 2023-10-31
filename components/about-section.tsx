@@ -2,14 +2,27 @@ import shield from "@/assets/shield-front-gradient.png";
 import wallet from "@/assets/wallet-front-gradient.png";
 import flash from "@/assets/flash-front-gradient.png";
 import { TablePart, TableTitle } from "@/components/table-part";
+import AboutContent from "@/components/about-content";
 
 export default function AboutSection() {
   return (
-    <section className="my-8">
-      <table
-        id="about"
-        className="hidden md:table bg-muted rounded-[3rem] border-spacing-0 w-full h-96 my-6"
-      >
+    <section id="about" className="my-8">
+      <div className="md:hidden">
+        <AboutContent imageSrc={shield} imageTitle="shield" title="sécurité">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda
+          consectetur deserunt, fuga id ipsam molestiae
+        </AboutContent>
+        <AboutContent imageSrc={wallet} imageTitle="wallet" title="prix">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda
+          consectetur deserunt, fuga id ipsam molestiae
+        </AboutContent>
+        <AboutContent imageSrc={flash} imageTitle="flash" title="vitesse">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda
+          consectetur deserunt, fuga id ipsam molestiae
+        </AboutContent>
+      </div>
+
+      <table className="hidden md:table bg-muted rounded-[3rem] border-spacing-0 w-full h-96 my-6">
         <thead className="h-[40%]">
           <tr>
             <TableTitle delay={0.3}>security</TableTitle>
