@@ -27,7 +27,7 @@ export default function MainNav() {
             className={`${
               teko.className
             } uppercase text-2xl transition-all hover:text-[#55d8f9] ${
-              pathname === "/shop" && "text-[#55d8f9]"
+              pathname.includes("/shop") && "text-[#55d8f9]"
             }`}
             href="/shop"
           >
