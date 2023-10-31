@@ -4,17 +4,13 @@ import Image, { StaticImageData } from "next/image";
 import { motion } from "framer-motion";
 import { PropsWithChildren, ReactNode } from "react";
 import { Teko } from "next/font/google";
+import { spring } from "@/components/animation";
 
 const teko = Teko({ weight: ["500"], subsets: ["latin"] });
 
-const spring = {
-  initial: { opacity: 0, translateY: 15 },
-  animate: { opacity: 1, translateY: 0 },
-};
+export type Delay = number;
 
-type Delay = number;
-
-type TablePartProps = {
+export type TablePartProps = {
   imageSrc: StaticImageData;
   imageTitle: string;
   delay: Delay;
