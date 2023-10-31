@@ -6,14 +6,18 @@ import { useSession } from "next-auth/react";
 import { useTheme } from "next-themes";
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { Profile } from "@/components/profile";
+import MainNav from "@/components/main-nav";
+import SideNav from "@/components/side-nav";
 
 export function Navbar() {
   const { data: session } = useSession();
+
   const { setTheme } = useTheme();
 
   return (
     <nav className="container flex items-center justify-between py-3">
-      <div>test</div>
+      <SideNav />
+      <MainNav />
 
       <div className="flex gap-2 items-center">
         {session ? (
