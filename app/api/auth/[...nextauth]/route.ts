@@ -34,6 +34,7 @@ export const authOptions: NextAuthOptions = {
         where: { email: session.user.email as string },
       });
       session.user.isAdmin = !!user?.isAdmin;
+      session.user.id = user!.id;
       return session;
     },
   },
