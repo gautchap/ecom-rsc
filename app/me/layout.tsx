@@ -15,9 +15,12 @@ type RootLayoutProps = {
 
 export default async function AccountLayout({ children }: RootLayoutProps) {
   const session = await getServerSession(authOptions);
-  if (!session) {
-    redirect("/login");
-  }
+  if (!session) redirect("/login");
 
-  return <>{children}</>;
+  return (
+    <div className="md:flex items-start justify-around">
+      <aside></aside>
+      <section className="md:flex items-start gap-5">{children}</section>
+    </div>
+  );
 }
