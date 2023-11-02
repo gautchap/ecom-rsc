@@ -45,18 +45,18 @@ model Session {
 }
 
 model User {
-  id            String        @id @default(cuid())
-  name          String?
-  email         String?       @unique
+  id            String       @id @default(cuid())
+  name          String
+  email         String       @unique
   emailVerified DateTime?
   image         String?
-  isAdmin       Boolean       @default(false)
+  isAdmin       Boolean      @default(false)
   accounts      Account[]
   sessions      Session[]
-  UserAddress   UserAddress[]
   Order         Order[]
-  createdAt     DateTime      @default(now()) @map("created_at")
-  updatedAt     DateTime      @default(now()) @updatedAt @map("updated_at")
+  createdAt     DateTime     @default(now()) @map("created_at")
+  updatedAt     DateTime     @default(now()) @updatedAt @map("updated_at")
+  UserAddress   UserAddress?
 
   @@map("users")
 }
@@ -71,10 +71,11 @@ model VerificationToken {
 
 model UserAddress {
   id         String   @id @default(cuid())
-  userId     String   @map("user_id")
+  userId     String   @unique @map("user_id")
   user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   firstName  String   @map("first_name")
   lastName   String   @map("last_name")
+  telephone  String?
   address    String
   city       String
   postalCode String   @map("postal_code")
@@ -112,14 +113,14 @@ model Product {
 }
 
 model Order {
-  id           String           @id @default(cuid())
-  userId       String           @map("user_id")
-  user         User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id           String          @id @default(cuid())
+  userId       String          @map("user_id")
+  user         User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   total        Float
   OrderDetails OrderDetails[]
-  PaymentId    PaymentDetails[]
-  createdAt    DateTime         @default(now()) @map("created_at")
-  updatedAt    DateTime         @default(now()) @updatedAt @map("updated_at")
+  PaymentId    PaymentDetails?
+  createdAt    DateTime        @default(now()) @map("created_at")
+  updatedAt    DateTime        @default(now()) @updatedAt @map("updated_at")
 
   @@map("orders")
 }
@@ -140,7 +141,7 @@ model OrderDetails {
 
 model PaymentDetails {
   id        String   @id @default(cuid())
-  orderId   String   @map("order_id")
+  orderId   String   @unique @map("order_id")
   order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
   amount    Float
   status    Status   @default(pending)
