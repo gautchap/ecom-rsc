@@ -20,6 +20,7 @@
         "project": "tsconfig.json"
     },
     "plugins": ["react", "react-refresh", "react-hooks", "@typescript-eslint", "github", "unicorn"],
+    "ignorePatterns": ["components/ui/*"],
     "rules": {
         "react-refresh/only-export-components": "warn",
         "unicorn/filename-case": "off",
