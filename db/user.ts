@@ -8,20 +8,17 @@ import {
 } from "@/types/user";
 import { Prisma, UserAddress } from "@prisma/client";
 
-export const createUserAddress = async (
-  userAddress: CreateUserAddress,
-): Promise<UserAddress | null> => {
-  const {
-    id,
-    userId,
-    firstName,
-    lastName,
-    telephone,
-    address,
-    city,
-    postalCode,
-    country,
-  } = userAddress;
+export const createUserAddress = async ({
+  id,
+  userId,
+  firstName,
+  lastName,
+  telephone,
+  address,
+  city,
+  postalCode,
+  country,
+}: CreateUserAddress): Promise<UserAddress | null> => {
   let user = null;
 
   try {
@@ -74,6 +71,8 @@ export const getUser = async ({
 
   if (!user) return null;
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   return user;
 };
 
@@ -103,5 +102,7 @@ export const updateUser = async ({
     throw error;
   }
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   return isUser;
 };

@@ -4,7 +4,7 @@ export const userAddress = z.object({
   id: z.string(),
   firstName: z.string(),
   lastName: z.string(),
-  telephone: z.string().nullable(),
+  telephone: z.string().optional(),
   address: z.string(),
   city: z.string(),
   postalCode: z.string(),
