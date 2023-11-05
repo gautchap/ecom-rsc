@@ -12,11 +12,13 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Icons } from "@/components/ui/icons";
+import { useShoppingCart } from "@/context/shopping-cart-provider";
 
 const teko = Teko({ weight: ["500"], subsets: ["latin"] });
 
 export default function SideNav() {
   const pathname = usePathname();
+  const { cartQuantity } = useShoppingCart();
   return (
     <div className="md:hidden">
       <Sheet>
@@ -58,12 +60,18 @@ export default function SideNav() {
                   <Link
                     className={`${
                       teko.className
-                    } uppercase text-2xl transition-all hover:text-[#55d8f9] ${
+                    } relative uppercase text-2xl transition-all hover:text-[#55d8f9] ${
                       pathname === "/checkout" && "text-[#55d8f9]"
                     }`}
                     href="/checkout"
                   >
-                    panier
+                    <span>panier</span>
+
+                    {cartQuantity > 0 && (
+                      <span className="absolute top-0 right-0 inline-flex items-center justify-center p-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
+                        {cartQuantity}
+                      </span>
+                    )}
                   </Link>
                 </SheetClose>
               </li>
