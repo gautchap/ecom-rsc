@@ -23,6 +23,7 @@ import { useRouter } from "next/navigation";
 import { Textarea } from "@/components/ui/textarea";
 
 type CreateCategoryProps = {
+  // eslint-disable-next-line no-unused-vars
   setEdit?: (value: boolean) => void;
   category?: CategoriesWithProducts | null;
 };

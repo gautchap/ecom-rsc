@@ -28,6 +28,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 
 type CreateProductProps = {
+  // eslint-disable-next-line no-unused-vars
   setEdit?: (value: boolean) => void;
   categories?: CategoriesWithProducts[];
   product?: Product | undefined;
