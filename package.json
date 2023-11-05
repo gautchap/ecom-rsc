@@ -6,17 +6,20 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
-        "lint": "next lint"
+        "lint": "next lint",
+        "prisma": "prisma format && prisma generate && prisma migrate dev --name initial"
     },
     "dependencies": {
         "@auth/prisma-adapter": "latest",
         "@hookform/resolvers": "latest",
         "@prisma/client": "latest",
+        "@radix-ui/react-accordion": "latest",
         "@radix-ui/react-avatar": "latest",
         "@radix-ui/react-dialog": "latest",
         "@radix-ui/react-dropdown-menu": "latest",
         "@radix-ui/react-icons": "latest",
         "@radix-ui/react-label": "latest",
+        "@radix-ui/react-select": "latest",
         "@radix-ui/react-slot": "latest",
         "@radix-ui/react-switch": "latest",
         "@radix-ui/react-toast": "latest",
@@ -30,6 +33,7 @@
         "react": "latest",
         "react-dom": "latest",
         "react-hook-form": "latest",
+        "sharp": "latest",
         "tailwind-merge": "latest",
         "tailwindcss-animate": "latest"
     },
