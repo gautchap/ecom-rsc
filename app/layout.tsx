@@ -4,13 +4,14 @@ import { ReactNode } from "react";
 import { Navbar } from "@/components/nav-bar";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import SessionProvider from "@/context/NextAuthProvider";
+import SessionProvider from "@/context/next-auth-provider";
 import { ThemeProvider } from "@/context/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { Poppins } from "next/font/google";
 import Footer from "@/components/footer";
+import { ShoppingCartProvider } from "@/context/shopping-cart-provider";
 
-const poppins = Poppins({ weight: ["400", "600"], subsets: ["latin"] });
+const poppins = Poppins({ weight: ["400", "600", "700"], subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Home",
@@ -33,10 +34,12 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <Navbar />
-            <main className="container min-h-[95dvh]">{children}</main>
-            <Footer />
-            <Toaster />
+            <ShoppingCartProvider>
+              <Navbar />
+              <main className="container min-h-[95dvh]">{children}</main>
+              <Footer />
+              <Toaster />
+            </ShoppingCartProvider>
           </ThemeProvider>
         </SessionProvider>
       </body>
