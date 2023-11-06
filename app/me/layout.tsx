@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
+import UserNav from "@/components/user-nav";
 
 export const metadata: Metadata = {
   title: "Mon Compte",
@@ -19,7 +20,7 @@ export default async function AccountLayout({ children }: RootLayoutProps) {
 
   return (
     <div className="md:flex items-start justify-around">
-      <aside></aside>
+      <UserNav session={session} />
       <section className="md:flex items-start gap-5">{children}</section>
     </div>
   );
