@@ -28,7 +28,7 @@ export function Navbar() {
           </Link>
         )}
         <div className="flex items-center space-x-2">
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" title="Switch theme">
             <SunIcon
               onClick={() => setTheme("dark")}
               className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
