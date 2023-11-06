@@ -54,7 +54,7 @@ export default function EditProduct({ product, categories }: EditProductProps) {
           categories={categories}
         />
       ) : (
-        <Card>
+        <Card className="my-2 w-[35rem]">
           <CardHeader>
             <CardTitle>
               <Link href={product.name}>{product.name}</Link>

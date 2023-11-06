@@ -47,7 +47,7 @@ export default function EditCategory({ category }: EditCategoryProps) {
       {isEdit ? (
         <CategoryForm setEdit={setIsEdit} category={category} />
       ) : (
-        <Card>
+        <Card className="my-2 w-[35rem]">
           <CardHeader>
             <CardTitle>
               <Link href={category.name}>{category.name}</Link>

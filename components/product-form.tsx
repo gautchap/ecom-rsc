@@ -98,7 +98,7 @@ export default function ProductForm({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(handleSubmit)}
-        className="space-y-3 my-5 border rounded-3xl p-4"
+        className="space-y-3 my-5 border rounded-3xl p-4 w-[35rem]"
       >
         <FormField
           control={form.control}
