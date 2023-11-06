@@ -37,6 +37,7 @@ export default function CheckoutForm({ user, products }: CheckoutFormProps) {
   });
 
   const handleSubmit = async () => {
+    // eslint-disable-next-line no-console
     console.log(user?.id, subTotal, cartItems);
   };
 
