@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import { getCategory } from "@/db/categories";
 import { notFound } from "next/navigation";
-import React, { Suspense } from "react";
 import { Product } from "@prisma/client";
 import { formatCurrency } from "@/utils/format-currency";
 import Link from "next/link";
