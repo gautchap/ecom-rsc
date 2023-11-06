@@ -18,9 +18,19 @@ type ShoppingCartContextType = {
   setCartItems: (value: CartItems) => void;
 };
 
-const ShoppingCartContext = createContext({} as ShoppingCartContextType);
+const ShoppingCartContext = createContext<ShoppingCartContextType | undefined>(
+  undefined,
+);
 
-export const useShoppingCart = () => useContext(ShoppingCartContext);
+export const useShoppingCart = () => {
+  const context = useContext(ShoppingCartContext);
+  if (context === undefined) {
+    throw new Error(
+      "useShoppingCart must be used within a ShoppingCartProvider",
+    );
+  }
+  return context;
+};
 
 export const ShoppingCartProvider = ({
   children,
