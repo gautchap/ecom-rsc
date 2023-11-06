@@ -3,7 +3,6 @@ import { getCategory } from "@/db/categories";
 import { notFound } from "next/navigation";
 import React from "react";
 import { Product } from "@prisma/client";
-import ProductStore from "@/components/product-store";
 import { formatCurrency } from "@/utils/format-currency";
 import Link from "next/link";
 import {
@@ -19,6 +18,11 @@ import {
 } from "@radix-ui/react-icons";
 import Image from "next/image";
 import tshirt from "@/assets/tshirt.jpg";
+import dynamic from "next/dynamic";
+
+const ProductStore = dynamic(() => import("@/components/product-store"), {
+  ssr: false,
+});
 
 type Props = {
   params: {
@@ -87,7 +91,9 @@ export default async function Page({ params }: Props) {
           {productFiltered.description}
         </p>
         <p className="my-4">{formatCurrency(productFiltered.price)}</p>
+
         <ProductStore product={productFiltered} />
+
         <Accordion type="single" collapsible className="w-full my-4">
           <AccordionItem value="item-1">
             <AccordionTrigger>

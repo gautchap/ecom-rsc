@@ -3,13 +3,20 @@
 import Link from "next/link";
 import { Teko } from "next/font/google";
 import { usePathname } from "next/navigation";
-import { useShoppingCart } from "@/context/shopping-cart-provider";
+import dynamic from "next/dynamic";
 
 const teko = Teko({ weight: ["500"], subsets: ["latin"] });
 
+const BadgeNotification = dynamic(
+  () => import("@/components/badge-notification"),
+  {
+    ssr: false,
+  },
+);
+
 export default function MainNav() {
   const pathname = usePathname();
-  const { cartQuantity } = useShoppingCart();
+
   return (
     <>
       <ul className="hidden md:flex gap-3 ">
@@ -47,11 +54,7 @@ export default function MainNav() {
           >
             <span>panier</span>
 
-            {cartQuantity > 0 && (
-              <span className="absolute top-0 right-0 inline-flex items-center justify-center p-1 text-xs font-bold leading-none text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">
-                {cartQuantity}
-              </span>
-            )}
+            <BadgeNotification />
           </Link>
         </li>
       </ul>
