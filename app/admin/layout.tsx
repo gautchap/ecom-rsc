@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { notFound } from "next/navigation";
+import AdminNav from "@/components/admin-nav";
 
 export const metadata: Metadata = {
   title: "Espace admin",
@@ -23,5 +24,10 @@ export default async function AdminLayout({ children }: RootLayoutProps) {
     notFound();
   }
 
-  return <>{children}</>;
+  return (
+    <>
+      <AdminNav />
+      <section>{children}</section>
+    </>
+  );
 }
