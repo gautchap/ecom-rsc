@@ -25,7 +25,10 @@ export async function sendVerificationRequest({
   const transport = createTransport(provider.server);
   const result = await transport.sendMail({
     to: identifier,
-    from: provider.from,
+    from: {
+      name: "Ecom RSC",
+      address: provider.from,
+    },
     subject: `Sign in to ${host}`,
     text: text({ url, host }),
     html: html({ url, host }),
