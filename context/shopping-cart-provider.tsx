@@ -1,8 +1,8 @@
 "use client";
 
-import { createContext, useContext, ReactNode } from "react";
+import { createContext, useContext, ReactNode, useEffect } from "react";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
-import { CartItems } from "@/types/storage";
+import { CartItems, CartItem } from "@/types/storage";
 
 type ShoppingCartContextProps = {
   children: ReactNode;
@@ -36,6 +36,33 @@ export const ShoppingCartProvider = ({
   children,
 }: ShoppingCartContextProps) => {
   const [cartItems, setCartItems] = useLocalStorage<CartItems>("cart", []);
+
+  const hasDuplicates = (items: CartItems): boolean => {
+    const uniqueProductIds = items.map((item) => item.productId);
+    const uniqueSet = new Set(uniqueProductIds);
+
+    return uniqueSet.size < items.length;
+  };
+
+  const mergeDuplicates = (items: CartItems): CartItems => {
+    const mergedItems: { [key: string]: CartItem } = {};
+    for (const item of items) {
+      const productId = item.productId;
+      const quantity = item.quantity;
+      if (mergedItems[productId]) {
+        mergedItems[productId].quantity += quantity;
+      } else {
+        mergedItems[productId] = { productId, quantity };
+      }
+    }
+    return Object.values(mergedItems);
+  };
+
+  useEffect(() => {
+    if (hasDuplicates(cartItems)) {
+      setCartItems(mergeDuplicates(cartItems));
+    }
+  }, []);
 
   const cartQuantity = cartItems.reduce(
     (quantity, item) => item.quantity + quantity,
