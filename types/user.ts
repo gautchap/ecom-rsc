@@ -15,7 +15,7 @@ export const userAddress = z.object({
 
 export const UserSchema = z.object({
   id: z.string(),
-  name: z.string(),
+  name: z.string().optional(),
   image: z.string().nullable(),
   email: z.string(),
   emailVerified: z.coerce.date().nullable(),
