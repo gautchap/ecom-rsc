@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { getCategory } from "@/db/categories";
 import { notFound } from "next/navigation";
-import React from "react";
+import React, { Suspense } from "react";
 import { Product } from "@prisma/client";
 import { formatCurrency } from "@/utils/format-currency";
 import Link from "next/link";
@@ -19,9 +19,19 @@ import {
 import Image from "next/image";
 import tshirt from "@/assets/tshirt.jpg";
 import dynamic from "next/dynamic";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const ProductStore = dynamic(() => import("@/components/product-store"), {
   ssr: false,
+  loading: () => (
+    <div className="flex flex-col ">
+      <Skeleton className="h-4 w-52" />
+      <div className="flex my-1 gap-2 w-full">
+        <Skeleton className="h-10 rounded-2xl w-1/2" />
+        <Skeleton className="h-10 rounded-2xl w-1/2" />
+      </div>
+    </div>
+  ),
 });
 
 type Props = {
