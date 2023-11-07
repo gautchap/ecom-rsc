@@ -38,8 +38,7 @@ export default async function Page() {
 
         <CartCheckout products={products} categories={categories} />
       </div>
-
-      <CheckoutForm products={products} user={user} />
+      {user && <CheckoutForm products={products} user={user} />}
     </section>
   );
 }
