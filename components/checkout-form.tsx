@@ -14,14 +14,19 @@ import { useForm } from "react-hook-form";
 import { UserWithAddressType } from "@/types/user";
 import { useShoppingCart } from "@/context/shopping-cart-provider";
 import { Product } from "@prisma/client";
+import { createOrder } from "@/db/orders";
+import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
 
 type CheckoutFormProps = {
   products: Product[] | null;
-  user: UserWithAddressType | null;
+  user: UserWithAddressType;
 };
 
 export default function CheckoutForm({ user, products }: CheckoutFormProps) {
-  const { cartItems } = useShoppingCart();
+  const { cartItems, setCartItems } = useShoppingCart();
+  const { toast } = useToast();
+  const router = useRouter();
 
   const subTotal = cartItems.reduce((total, cartItem) => {
     const item = products?.find((product) => product.id === cartItem.productId);
@@ -37,8 +42,23 @@ export default function CheckoutForm({ user, products }: CheckoutFormProps) {
   });
 
   const handleSubmit = async () => {
-    // eslint-disable-next-line no-console
-    console.log(user?.id, subTotal, cartItems);
+    try {
+      await createOrder({
+        userId: user.id,
+        total: subTotal,
+        orderDetails: cartItems,
+      });
+      toast({ title: `✅ Commande créée` });
+      window.localStorage.removeItem("cart");
+      setCartItems([]);
+      router.refresh();
+    } catch (error) {
+      Promise.reject(error);
+      toast({
+        variant: "destructive",
+        title: `❌ Erreur lors de la création de la commande`,
+      });
+    }
   };
 
   return (
