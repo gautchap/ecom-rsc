@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Projet E-commerce avec React, Next.js, Prisma, TypeScript
 
-## Getting Started
+Ce projet est une plateforme e-commerce développée avec React, Next.js, Prisma, TypeScript, hébergée sur Vercel, et utilisant Supabase pour l'authentification et la gestion de la base de données.
 
-First, run the development server:
+## Fonctionnalités
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Authentification** :
+  - Les utilisateurs peuvent se connecter avec leur compte Google.
+  - Les utilisateurs peuvent se connecter en utilisant un Magic Link.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Fonctionnalités pour les utilisateurs** :
+  - Parcourir la boutique en ligne.
+  - Ajouter un ou plusieurs produits au panier.
+  - Passer des commandes.
+  - Consulter l'historique de leurs commandes.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Fonctionnalités pour les administrateurs** :
+  - Créer des catégories de produits.
+  - Ajouter de nouveaux produits à la boutique.
+  - Consulter les commandes passées par tous les utilisateurs.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Technologies Utilisées
 
-## Learn More
+- [React](https://reactjs.org/)
+- [Next.js](https://nextjs.org/)
+- [Prisma](https://www.prisma.io/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Vercel](https://vercel.com/)
+- [Supabase](https://supabase.io/)
 
-To learn more about Next.js, take a look at the following resources:
+## Installation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Clonez ce dépôt sur votre machine :
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+   ```bash
+   git clone https://github.com/votre-utilisateur/nom-du-projet.git
+   ```
+   
+2. Installez les dépendances :
 
-## Deploy on Vercel
+   ```bash
+   npm install
+   ```
+3. Créez un fichier .env.local à la racine du projet et configurez les variables d'environnement nécessaires pour Supabase et d'autres services.
+   
+4. Lancez l'application en mode développement :
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+   ```bash
+   npm run dev
+   ```
+   
