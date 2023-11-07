@@ -11,10 +11,10 @@ export default async function Page() {
 
   return (
     <section className="max-h-screen overflow-auto">
-      {orders ? (
+      {orders && orders?.length > 0 ? (
         <OrderCard orders={orders} />
       ) : (
-        <p>Vous n&apos;avez pas encore de commande</p>
+        <p className="my-4">Vous n&apos;avez pas encore de commande</p>
       )}
     </section>
   );
