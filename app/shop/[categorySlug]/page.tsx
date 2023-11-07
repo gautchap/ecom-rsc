@@ -23,15 +23,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page({ params }: Props) {
   const category = await getCategory(decodeURI(params.categorySlug));
 
+  if (!category) notFound();
+
   return (
     <section>
-      <Link className="uppercase font-bold" href={`/shop/${category?.name}`}>
-        {category?.name}
+      <Link className="uppercase font-bold" href={`/shop/${category.name}`}>
+        {category.name}
       </Link>
-      <p className="text-muted-foreground">{category?.description}</p>
+      <p className="text-muted-foreground">{category.description}</p>
 
       <div className="flex justify-center gap-8 flex-wrap">
-        {category?.Product.map((product) => (
+        {category.Product.map((product) => (
           <ProductCard key={product.id} category={category} product={product} />
         ))}
       </div>
