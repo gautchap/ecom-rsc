@@ -8,6 +8,10 @@ interface OrderWithProduct extends OrderDetails {
 }
 
 export interface OrderWithDetails extends Order {
+  user: {
+    name: string | null;
+    email: string;
+  };
   OrderDetails: OrderWithProduct[];
 }
 
@@ -19,8 +23,6 @@ const paymentDetails = z.object({
   createdAt: z.coerce.date(),
   updatedAt: z.coerce.date(),
 });
-
-export const idSchema = z.string();
 
 export const orderSchema = z.object({
   id: z.string(),
@@ -58,16 +60,4 @@ export const createOrderFullSchema = createOrderSchema.extend({
   orderDetails: z.array(createOrderDetailsSchema),
 });
 
-export const orderWithDetailsSchema = z.array(
-  orderSchema.extend({
-    user: z.object({
-      name: z.string().nullable(),
-      email: z.string().email(),
-    }),
-    OrderDetails: z.array(orderDetailsSchema),
-    PaymentId: paymentDetails.nullable(),
-  }),
-);
-
-export type orderWithDetailsType = z.infer<typeof orderWithDetailsSchema>;
 export type createOrderFullType = z.infer<typeof createOrderFullSchema>;

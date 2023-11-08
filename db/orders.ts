@@ -2,11 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { Order } from "@prisma/client";
-import {
-  createOrderFullType,
-  OrderWithDetails,
-  orderWithDetailsType,
-} from "@/types/orders";
+import { createOrderFullType, OrderWithDetails } from "@/types/orders";
 
 export const createOrder = async ({
   userId,
@@ -38,11 +34,10 @@ export const createOrder = async ({
   return isOrderCreated;
 };
 
-export const getOrders = async (): Promise<orderWithDetailsType | null> => {
+export const getOrders = async (): Promise<OrderWithDetails[] | null> => {
   const orders = await prisma.order.findMany({
     include: {
-      OrderDetails: true,
-      PaymentId: true,
+      OrderDetails: { include: { product: true } },
       user: {
         select: {
           name: true,
@@ -70,7 +65,12 @@ export const getOrdersByUser = async ({
     },
     include: {
       OrderDetails: { include: { product: true } },
-      // PaymentId: true,
+      user: {
+        select: {
+          name: true,
+          email: true,
+        },
+      },
     },
     orderBy: {
       createdAt: "desc",
