@@ -1,31 +1,17 @@
-"use client";
-
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
 import { Teko } from "next/font/google";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
-
-const springScale = {
-  initial: { opacity: 0, translateY: 15, scaleY: 0.8 },
-  animate: { opacity: 1, translateY: 0, scaleY: 1 },
-};
+import { Session } from "next-auth";
+import FooterContainer from "@/components/footer-container";
 
 const teko = Teko({ weight: ["500"], subsets: ["latin"] });
 
-export default function Footer() {
-  const { data: session } = useSession();
-  const reference = useRef(null);
-  const isInView = useInView(reference, { once: false });
+type FooterProps = {
+  session: Session | null;
+};
+
+export default function Footer({ session }: FooterProps) {
   return (
-    <motion.footer
-      ref={reference}
-      variants={springScale}
-      initial="initial"
-      animate={isInView ? "animate" : "initial"}
-      transition={{ duration: 0.5 }}
-      className="container flex justify-center gap-3 mb-14 md:gap-5"
-    >
+    <FooterContainer>
       <div>
         <h2 className={`${teko.className} uppercase text-xl`}>
           confidentialité
@@ -80,6 +66,6 @@ export default function Footer() {
           </li>
         </ul>
       </div>
-    </motion.footer>
+    </FooterContainer>
   );
 }
