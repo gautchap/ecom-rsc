@@ -35,9 +35,9 @@ export default async function RootLayout({
             disableTransitionOnChange
           >
             <ShoppingCartProvider>
-              <Navbar />
+              <Navbar session={session} />
               <main className="container min-h-[95dvh]">{children}</main>
-              <Footer />
+              <Footer session={session} />
               <Toaster />
             </ShoppingCartProvider>
           </ThemeProvider>
