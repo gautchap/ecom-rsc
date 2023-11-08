@@ -6,15 +6,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { signOut, useSession } from "next-auth/react";
-import { PinRightIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
 import Image from "next/image";
 import profileIcon from "@/assets/boy-front-gradient.png";
+import { NavBarProps } from "@/components/nav-bar";
+import ButtonSignOut from "@/components/button-signout";
 
-export function Profile() {
-  const { data: session } = useSession();
-
+export function Profile({ session }: NavBarProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -39,15 +37,7 @@ export function Profile() {
         <DropdownMenuItem className="flex justify-between items-center cursor-pointer">
           <Link href="/me">Mon Compte</Link>
         </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={() => signOut({ callbackUrl: "/" })}
-          className="flex justify-between items-center cursor-pointer"
-        >
-          <p className="font-medium text-red-500 hover:text-red-500">
-            Déconnexion
-          </p>
-          <PinRightIcon className="text-red-500" />
-        </DropdownMenuItem>
+        <ButtonSignOut />
       </DropdownMenuContent>
     </DropdownMenu>
   );
