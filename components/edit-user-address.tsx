@@ -31,13 +31,13 @@ export default function EditUserAddress({ user }: CreateUserAddressProps) {
     resolver: zodResolver(updateUserAddressSchema),
     defaultValues: {
       id: user?.UserAddress?.id || "",
-      firstName: user?.UserAddress?.firstName || "",
-      lastName: user?.UserAddress?.lastName || "",
-      telephone: user?.UserAddress?.telephone || "",
-      address: user?.UserAddress?.address || "",
-      city: user?.UserAddress?.city || "",
-      country: user?.UserAddress?.country || "",
-      postalCode: user?.UserAddress?.postalCode || "",
+      firstName: user?.UserAddress?.firstName || "John",
+      lastName: user?.UserAddress?.lastName || "Doe",
+      telephone: user?.UserAddress?.telephone || "06 34 63 10 99",
+      address: user?.UserAddress?.address || "123 rue de la paix",
+      city: user?.UserAddress?.city || "Paris",
+      country: user?.UserAddress?.country || "France",
+      postalCode: user?.UserAddress?.postalCode || "75000",
     },
   });
 
