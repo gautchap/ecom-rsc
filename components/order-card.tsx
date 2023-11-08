@@ -8,12 +8,14 @@ import {
 } from "@/components/ui/card";
 import { formatCurrency } from "@/utils/format-currency";
 import { OrderWithDetails } from "@/types/orders";
+import ButtonDelete from "@/components/button-delete";
 
 type OrderCardProps = {
   orders: OrderWithDetails[];
+  isAdmin?: boolean;
 };
 
-export default function OrderCard({ orders }: OrderCardProps) {
+export default function OrderCard({ orders, isAdmin }: OrderCardProps) {
   return (
     <>
       {orders.map((order) => (
@@ -46,10 +48,18 @@ export default function OrderCard({ orders }: OrderCardProps) {
               </Fragment>
             ))}
           </CardContent>
-          <CardFooter>
+          <CardFooter className="flex flex-col items-start">
             <p>
               Total de la commande <b>{formatCurrency(order.total)}</b>
             </p>
+            {isAdmin && (
+              <>
+                <p>
+                  Utilisateur : <b>{order.user.email}</b>
+                </p>
+                <ButtonDelete id={order.id} />
+              </>
+            )}
           </CardFooter>
         </Card>
       ))}
