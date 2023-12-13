@@ -44,6 +44,11 @@ export default function EditProduct({ product, categories }: EditProductProps) {
       });
     }
   };
+  const category = categories.find((cat) =>
+    cat.Product.find(
+      (thisProduct) => thisProduct.categoryId === product.categoryId,
+    ),
+  );
 
   return (
     <>
@@ -57,7 +62,9 @@ export default function EditProduct({ product, categories }: EditProductProps) {
         <Card className="my-2 w-[35rem]">
           <CardHeader>
             <CardTitle>
-              <Link href={product.name}>{product.name}</Link>
+              <Link href={`/shop/${category?.name}/${product.name}`}>
+                {product.name}
+              </Link>
             </CardTitle>
             {product.image && (
               <img

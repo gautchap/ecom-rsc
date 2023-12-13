@@ -50,7 +50,7 @@ export default function EditCategory({ category }: EditCategoryProps) {
         <Card className="my-2 w-[35rem]">
           <CardHeader>
             <CardTitle>
-              <Link href={category.name}>{category.name}</Link>
+              <Link href={`/shop/${category.name}`}>{category.name}</Link>
             </CardTitle>
           </CardHeader>
           <CardContent>
