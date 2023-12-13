@@ -1,5 +1,8 @@
+/* eslint-disable unicorn/prefer-spread */
+/* eslint-disable unicorn/new-for-builtins */
+
 import { Metadata } from "next";
-import { getCategory } from "@/db/categories";
+import { getCategories, getCategory } from "@/db/categories";
 import { notFound } from "next/navigation";
 import { Product } from "@prisma/client";
 import { formatCurrency } from "@/utils/format-currency";
@@ -31,6 +34,10 @@ const ProductStore = dynamic(() => import("@/components/product-store"), {
       </div>
     </div>
   ),
+});
+
+const TrendingProduct = dynamic(() => import("@/components/trending-product"), {
+  ssr: false,
 });
 
 type Props = {
@@ -73,74 +80,96 @@ export default async function Page({ params }: Props) {
 
   if (!productFiltered) notFound();
 
+  const categories = await getCategories();
+
+  if (!categories) notFound();
+
+  const categoriesFiltered = categories.map((cat) => {
+    cat.Product = cat.Product.filter(
+      (product) => product.name !== "Tshirt Large",
+    );
+    return cat;
+  });
+
   return (
-    <section className="flex justify-center gap-8 flex-wrap">
-      {productFiltered.image ? (
-        <img
-          src={productFiltered.image}
-          alt={productFiltered.name}
-          className="min-w-[320px] max-h-[500px]"
-        />
-      ) : (
-        <Image
-          src={tshirt}
-          alt={productFiltered.name}
-          className="min-w-[320px] max-h-[500px]"
-          width={320}
-          height={500}
-        />
-      )}
+    <section>
+      <div className="flex justify-center gap-8 flex-wrap">
+        {productFiltered.image ? (
+          <img
+            src={productFiltered.image}
+            alt={productFiltered.name}
+            className="min-w-[320px] max-h-[500px]"
+          />
+        ) : (
+          <Image
+            src={tshirt}
+            alt={productFiltered.name}
+            className="min-w-[320px] max-h-[500px]"
+            width={320}
+            height={500}
+          />
+        )}
 
-      <div className="max-w-xs">
-        <Link href={`/shop/${category.name}`} className="text-xs my-4">
-          {category.name}
-        </Link>
-        <h2 className="text-2xl my-2">{productFiltered.name}</h2>
-        <p className="text-muted-foreground my-4">
-          {productFiltered.description}
-        </p>
-        <p className="my-4">{formatCurrency(productFiltered.price)}</p>
+        <div className="max-w-xs">
+          <Link href={`/shop/${category.name}`} className="text-xs my-4">
+            {category.name}
+          </Link>
+          <h2 className="text-2xl my-2">{productFiltered.name}</h2>
+          <p className="text-muted-foreground my-4">
+            {productFiltered.description}
+          </p>
+          <p className="my-4">{formatCurrency(productFiltered.price)}</p>
 
-        <ProductStore product={productFiltered} />
+          <ProductStore product={productFiltered} />
 
-        <Accordion type="single" collapsible className="w-full my-4">
-          <AccordionItem value="item-1">
-            <AccordionTrigger>
-              <span className="flex items-center gap-2">
-                <EnvelopeClosedIcon /> Livraison rapide
-              </span>
-            </AccordionTrigger>
-            <AccordionContent>
-              Votre colis arrivera dans un délai de 3 à 5 jours ouvrables à
-              votre lieu d&apos;enlèvement ou dans le confort de votre domicile.
-              ou dans le confort de votre domicile.
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="item-2">
-            <AccordionTrigger>
-              <span className="flex items-center gap-2">
-                <SymbolIcon /> Retours gratuits
-              </span>
-            </AccordionTrigger>
-            <AccordionContent>
-              La coupe n&apos;est pas parfaite ? Pas de souci - nous échangerons
-              votre produit pour un nouveau produit.
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="item-3">
-            <AccordionTrigger>
-              <span className="flex items-center gap-2">
-                <ReloadIcon />
-                Remboursement simplifié
-              </span>
-            </AccordionTrigger>
-            <AccordionContent>
-              Retournez-nous simplement votre produit et nous vous
-              rembourserons. Aucune question n&apos;est posée. Nous ferons tout
-              notre possible pour que votre retour se fasse sans problème.
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
+          <Accordion type="single" collapsible className="w-full my-4">
+            <AccordionItem value="item-1">
+              <AccordionTrigger>
+                <span className="flex items-center gap-2">
+                  <EnvelopeClosedIcon /> Livraison rapide
+                </span>
+              </AccordionTrigger>
+              <AccordionContent>
+                Votre colis arrivera dans un délai de 3 à 5 jours ouvrables à
+                votre lieu d&apos;enlèvement ou dans le confort de votre
+                domicile. ou dans le confort de votre domicile.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-2">
+              <AccordionTrigger>
+                <span className="flex items-center gap-2">
+                  <SymbolIcon /> Retours gratuits
+                </span>
+              </AccordionTrigger>
+              <AccordionContent>
+                La coupe n&apos;est pas parfaite ? Pas de souci - nous
+                échangerons votre produit pour un nouveau produit.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-3">
+              <AccordionTrigger>
+                <span className="flex items-center gap-2">
+                  <ReloadIcon />
+                  Remboursement simplifié
+                </span>
+              </AccordionTrigger>
+              <AccordionContent>
+                Retournez-nous simplement votre produit et nous vous
+                rembourserons. Aucune question n&apos;est posée. Nous ferons
+                tout notre possible pour que votre retour se fasse sans
+                problème.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
+      </div>
+      <div className="my-5 mb-6">
+        <h2>See Also</h2>
+        <div className="flex gap-2 justify-center md:justify-between flex-wrap ">
+          {Array.from(Array(4).keys()).map((index) => (
+            <TrendingProduct categories={categoriesFiltered} key={index} />
+          ))}
+        </div>
       </div>
     </section>
   );

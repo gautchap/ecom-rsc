@@ -1,18 +1,23 @@
-import Link from "next/link";
 import { getCategories } from "@/db/categories";
+import Breadcrumb from "@/components/breadcrumb";
+import ProductCard from "@/components/product-card";
 
 export default async function Page() {
   const categories = await getCategories();
   return (
     <section>
-      {categories?.map((category) => (
-        <div key={category.id}>
-          <Link className="uppercase font-bold" href={`/shop/${category.name}`}>
-            {category.name}
-          </Link>
-          <p className="text-muted-foreground">{category.description}</p>
-        </div>
-      ))}
+      <Breadcrumb categories={categories} />
+      <div className="flex justify-center gap-8 flex-wrap">
+        {categories?.map((category) =>
+          category.Product.map((product) => (
+            <ProductCard
+              key={product.id}
+              category={category}
+              product={product}
+            />
+          )),
+        )}
+      </div>
     </section>
   );
 }
