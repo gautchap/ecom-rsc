@@ -21,7 +21,7 @@ export default function ProductCardContainer({
         variants={spring}
         initial="initial"
         animate="animate"
-        className="flex flex-col w-[320px] h-[350px] hover:underline"
+        className="flex flex-col w-[320px] hover:underline"
         whileHover={{ scale: 0.9 }}
         whileTap={{ scale: 0.9 }}
         transition={{ type: "spring", stiffness: 400, damping: 17 }}
