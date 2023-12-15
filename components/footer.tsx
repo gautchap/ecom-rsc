@@ -15,18 +15,18 @@ export default function Footer({ session }: FooterProps) {
   return (
     <>
       <div className="border-t-2 " />
-      <FooterContainer>
-        <div className="my-3">
-          <p className="text-2xl font-bol text-center mb-2">Newsletter</p>
-          <div className="flex justify-center gap-2">
-            <Input
-              type="text"
-              placeholder="youremail@mail.com"
-              className="w-44"
-            />
-            <Button>Subscribe</Button>
-          </div>
+      <div className="my-3">
+        <p className="text-2xl font-bol text-center mb-2">Newsletter</p>
+        <div className="flex justify-center gap-2">
+          <Input
+            type="text"
+            placeholder="youremail@mail.com"
+            className="w-44"
+          />
+          <Button>Subscribe</Button>
         </div>
+      </div>
+      <FooterContainer>
         <div className="flex justify-center gap-3 mb-14 md:gap-5">
           <div>
             <h2 className={`${teko.className} uppercase text-xl`}>
@@ -35,7 +35,7 @@ export default function Footer({ session }: FooterProps) {
             <ul>
               <li>
                 <Link
-                  href="/cgu"
+                  href="#cgu"
                   className="transition-all hover:text-[#55d8f9]"
                 >
                   CGU
@@ -43,7 +43,7 @@ export default function Footer({ session }: FooterProps) {
               </li>
               <li>
                 <Link
-                  href="/cgv"
+                  href="#cgv"
                   className="transition-all hover:text-[#55d8f9]"
                 >
                   CGV
