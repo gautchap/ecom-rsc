@@ -4,7 +4,7 @@ import at_secondary from "@/assets/at-dynamic-color.png";
 import { Teko } from "next/font/google";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import AboutSection from "@/components/about-section";
+import bureau from "@/assets/bureau.jpg";
 
 const teko = Teko({ weight: ["500", "700"], subsets: ["latin"] });
 
@@ -56,7 +56,33 @@ export default function Home() {
           <Button variant="outline">Show more</Button>
         </Link>
       </section>
-      <AboutSection />
+
+      <div
+        id="about"
+        className="my-8 flex h-80 justify-between overflow-hidden bg-accent rounded-md"
+      >
+        <div className=" w-1/2 flex items-center justify-center">
+          <div className="w-1/2 space-y-2">
+            <h2 className={`${teko.className} text-3xl`}>
+              Lorem ipsum dolor sit amet
+            </h2>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste
+              magni natus rerum!
+            </p>
+            <Button>
+              <Link href="/shop">Shop this item</Link>
+            </Button>
+          </div>
+        </div>
+        <div className="w-1/2">
+          <Image
+            src={bureau}
+            alt="bureau"
+            className="w-full h-full object-cover"
+          />
+        </div>
+      </div>
     </>
   );
 }
