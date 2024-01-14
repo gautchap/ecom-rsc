@@ -16,7 +16,7 @@
         "@prisma/client": "latest",
         "@radix-ui/react-accordion": "latest",
         "@radix-ui/react-avatar": "latest",
-        "@radix-ui/react-dialog": "latest",
+        "@radix-ui/react-dialog": "^1.0.5",
         "@radix-ui/react-dropdown-menu": "latest",
         "@radix-ui/react-icons": "latest",
         "@radix-ui/react-label": "latest",
@@ -36,7 +36,8 @@
         "react-hook-form": "latest",
         "sharp": "latest",
         "tailwind-merge": "latest",
-        "tailwindcss-animate": "latest"
+        "tailwindcss-animate": "latest",
+        "vaul": "^0.8.0"
     },
     "devDependencies": {
         "@types/eslint": "latest",
