@@ -33,7 +33,7 @@ Ce projet est une plateforme e-commerce développée avec React, Next.js, Prisma
 1. Clonez ce dépôt sur votre machine :
 
    ```bash
-   git clone https://github.com/votre-utilisateur/nom-du-projet.git
+   git clone https://github.com/gautchap/ecom-rsc.git
    ```
    
 2. Installez les dépendances :
